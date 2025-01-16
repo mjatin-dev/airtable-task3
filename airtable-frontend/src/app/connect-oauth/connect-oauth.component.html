@@ -1,0 +1,35 @@
+<div class="min-h-screen flex flex-col items-center justify-center bg-white">
+  <!-- Header -->
+  <div class="bg-black w-screen h-16 flex items-center justify-between">
+    <div
+      class="max-w-6xl flex text-white items-center justify-between w-full mx-auto"
+    >
+      <h1 class="text-3xl font-bold">SREDIO</h1>
+      <!-- <p>Logged in as - {{ userName }}</p> -->
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <app-loader [loading]="isLoading"></app-loader>
+
+  <div
+    class="min-h-screen flex items-center mx-auto max-w-6xl py-10 flex-col bg-white mt-10"
+    style="width: 90%"
+  >
+    <button
+      class="bg-black text-white px-4 py-2 rounded hover:bg-black/30"
+      *ngIf="!isTokenPresent"
+      (click)="airtableService.startAirtableAuth()"
+    >
+      Authenticate with Airtable
+    </button>
+    <button
+      class="bg-black text-white px-4 py-2 rounded hover:bg-black/30"
+      *ngIf="isTokenPresent"
+      (click)="router.navigate(['/projects'])"
+    >
+      Go to projects
+    </button>
+    <!-- <button (click)="fetchProjects()">Fetch Projects</button> -->
+  </div>
+</div>

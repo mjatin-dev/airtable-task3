@@ -1,0 +1,41 @@
+<div class="min-h-screen flex flex-col items-center justify-center bg-white">
+  <!-- Header -->
+  <div class="bg-black w-screen h-16 flex items-center justify-between">
+    <div
+      class="max-w-6xl flex text-white items-center justify-between w-full mx-auto"
+    >
+      <h1 class="text-3xl font-bold">SREDIO</h1>
+      <!-- <p>Logged in as - {{ userName }}</p> -->
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <app-loader [loading]="isLoading"></app-loader>
+
+  <div class="container h-screen w-full mx-auto max-w-6xl py-10">
+    <div *ngIf="!isLoading">
+      <h1 class="text-3xl font-bold mb-3">All Projects</h1>
+      <div
+        class="flex items-center flex-wrap w-full px-10 py-5 gap-3 border-[1px] border-solid border-gray-200 rounded-xl"
+      >
+        <div
+          *ngFor="let project of projects"
+          (click)="getProjectById(project.id)"
+        >
+          <div
+            class="flex gap-3 cursor-pointer h-24 w-56 border-[1px] border-solid border-gray-200 shadow-sm hover:shadow-lg rounded-xl p-4 my-2"
+          >
+            <div>
+              <h3
+                class="text-lg font-bold rounded-xl bg-red-800/80 text-white flex items-center justify-center h-12 w-12"
+              >
+                {{ getInitials(project.name) }}
+              </h3>
+            </div>
+            <p class="text-[12px] text-stone-600">{{ project.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="min-h-screen flex flex-col items-center justify-center bg-white">
+  <!-- Header -->
+  <div class="bg-black w-screen h-16 flex items-center justify-between">
+    <div
+      class="max-w-6xl flex text-white items-center justify-between w-full mx-auto"
+    >
+      <h1 class="text-3xl font-bold">SREDIO</h1>
+      <p>Logged in as - {{ userName }}</p>
+    </div>
+  </div>
+
+  <div class="container h-screen w-full mx-auto max-w-6xl py-10">
+    <!-- Loader -->
+    <app-loader [loading]="isLoading"></app-loader>
+
+    <div class="dropdown" *ngIf="columnDefs.length > 0">
+      <button class="dropdown-toggle">Select Columns</button>
+      <div class="dropdown-menu">
+        <div *ngFor="let column of columnDefs">
+          <label>
+            <input
+              type="checkbox"
+              (change)="toggleColumnVisibility($event, column.name)"
+            />
+            {{ column.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="ag-theme-alpine" style="height: 500px; width: 100%">
+      <ag-grid-angular
+        class="ag-theme-alpine"
+        [rowData]="rowData"
+        [columnDefs]="defaultColumns"
+        [pagination]="true"
+        [paginationPageSize]="20"
+        [domLayout]="'autoHeight'"
+        [rowHeight]="40"
+      ></ag-grid-angular>
+    </div>
+  </div>
+</div>
