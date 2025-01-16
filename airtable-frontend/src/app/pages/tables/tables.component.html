@@ -1,0 +1,34 @@
+<div class="min-h-screen flex flex-col items-center justify-center bg-white">
+  <!-- Header -->
+  <div class="bg-black w-screen h-16 flex items-center justify-between">
+    <div
+      class="max-w-6xl flex text-white items-center justify-between w-full mx-auto"
+    >
+      <h1 class="text-3xl font-bold">SREDIO</h1>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <app-loader [loading]="isLoading"></app-loader>
+
+  <div class="container h-screen w-full mx-auto max-w-6xl py-10">
+    <button (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+    <mat-tab-group (selectedTabChange)="onTabChange($event)">
+      <mat-tab *ngFor="let table of tables" [label]="table.name">
+        <div *ngIf="isLoading" class="loading-container">
+          <app-loader></app-loader>
+        </div>
+        <div *ngIf="!isLoading">
+          <ag-grid-angular
+            style="width: 100%; height: 400px"
+            class="ag-theme-alpine mt-10"
+            [rowData]="rowData"
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef"
+            (rowClicked)="onRowClicked($event)"
+          ></ag-grid-angular>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
